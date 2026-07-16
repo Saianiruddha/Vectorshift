@@ -11,6 +11,7 @@ import {
 export const useStore = create((set, get) => ({
     nodes: [],
     edges: [],
+    nodeIDs: {},
     getNodeID: (type) => {
         const newIDs = {...get().nodeIDs};
         if (newIDs[type] === undefined) {
@@ -50,5 +51,28 @@ export const useStore = create((set, get) => ({
           return node;
         }),
       });
+    },
+    // Save pipeline to LocalStorage
+    savePipeline: () => {
+      const data = {
+        nodes: get().nodes,
+        edges: get().edges,
+        nodeIDs: get().nodeIDs,
+      };
+      localStorage.setItem('vectorshift_pipeline_save', JSON.stringify(data));
+    },
+    // Load pipeline from LocalStorage
+    loadPipeline: () => {
+      const saved = localStorage.getItem('vectorshift_pipeline_save');
+      if (saved) {
+        const data = JSON.parse(saved);
+        set({
+          nodes: data.nodes || [],
+          edges: data.edges || [],
+          nodeIDs: data.nodeIDs || {},
+        });
+        return true;
+      }
+      return false;
     },
   }));
