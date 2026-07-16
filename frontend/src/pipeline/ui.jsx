@@ -1,8 +1,8 @@
-// ui.js
+// ui.jsx
 // Displays the drag-and-drop UI
 // --------------------------------------------------
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useMemo } from 'react';
 import ReactFlow, { Controls, Background, MiniMap } from 'reactflow';
 import { useStore } from './store';
 import { useShallow } from 'zustand/react/shallow';
@@ -20,17 +20,6 @@ import 'reactflow/dist/style.css';
 
 const gridSize = 20;
 const proOptions = { hideAttribution: true };
-const nodeTypes = {
-  customInput: InputNode,
-  llm: LLMNode,
-  customOutput: OutputNode,
-  text: TextNode,
-  math: MathNode,
-  merge: MergeNode,
-  delay: DelayNode,
-  auth: AuthNode,
-  alert: AlertNode,
-};
 
 const selector = (state) => ({
   nodes: state.nodes,
@@ -55,6 +44,19 @@ export const PipelineUI = () => {
       onConnect
     } = useStore(useShallow(selector));
 
+    // Memoize nodeTypes to keep references stable and resolve warnings
+    const nodeTypes = useMemo(() => ({
+      customInput: InputNode,
+      llm: LLMNode,
+      customOutput: OutputNode,
+      text: TextNode,
+      math: MathNode,
+      merge: MergeNode,
+      delay: DelayNode,
+      auth: AuthNode,
+      alert: AlertNode,
+    }), []);
+
     const getInitNodeData = (nodeID, type) => {
       let nodeData = { id: nodeID, nodeType: `${type}` };
       return nodeData;
@@ -64,7 +66,6 @@ export const PipelineUI = () => {
         (event) => {
           event.preventDefault();
     
-          const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
           if (event?.dataTransfer?.getData('application/reactflow')) {
             const appData = JSON.parse(event.dataTransfer.getData('application/reactflow'));
             const type = appData?.nodeType;
@@ -74,9 +75,10 @@ export const PipelineUI = () => {
               return;
             }
       
-            const position = reactFlowInstance.project({
-              x: event.clientX - reactFlowBounds.left,
-              y: event.clientY - reactFlowBounds.top,
+            // Use screenToFlowPosition instead of deprecated project
+            const position = reactFlowInstance.screenToFlowPosition({
+              x: event.clientX,
+              y: event.clientY,
             });
 
             const nodeID = getNodeID(type);
@@ -90,7 +92,7 @@ export const PipelineUI = () => {
             addNode(newNode);
           }
         },
-        [reactFlowInstance]
+        [reactFlowInstance, addNode, getNodeID]
     );
 
     const onDragOver = useCallback((event) => {
