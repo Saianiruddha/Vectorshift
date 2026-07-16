@@ -3,15 +3,20 @@
 import { DraggableNode } from './draggableNode';
 
 export const PipelineToolbar = () => {
-
-    return (
-        <div style={{ padding: '10px' }}>
-            <div style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-                <DraggableNode type='customInput' label='Input' />
-                <DraggableNode type='llm' label='LLM' />
-                <DraggableNode type='customOutput' label='Output' />
-                <DraggableNode type='text' label='Text' />
-            </div>
-        </div>
-    );
+  return (
+    <div className="toolbar-container">
+      <h2 className="toolbar-title">VectorShift Pipeline Builder</h2>
+      <div className="toolbar-nodes">
+        <DraggableNode type='customInput' label='Input' />
+        <DraggableNode type='llm' label='LLM' />
+        <DraggableNode type='customOutput' label='Output' />
+        <DraggableNode type='text' label='Text' />
+        <DraggableNode type='math' label='Math' />
+        <DraggableNode type='merge' label='Merge Strings' />
+        <DraggableNode type='delay' label='Delay' />
+        <DraggableNode type='auth' label='Auth' />
+        <DraggableNode type='alert' label='Alert' />
+      </div>
+    </div>
+  );
 };

@@ -10,6 +10,11 @@ import { InputNode } from './nodes/inputNode';
 import { LLMNode } from './nodes/llmNode';
 import { OutputNode } from './nodes/outputNode';
 import { TextNode } from './nodes/textNode';
+import { MathNode } from './nodes/mathNode';
+import { MergeNode } from './nodes/mergeNode';
+import { DelayNode } from './nodes/delayNode';
+import { AuthNode } from './nodes/authNode';
+import { AlertNode } from './nodes/alertNode';
 
 import 'reactflow/dist/style.css';
 
@@ -20,6 +25,11 @@ const nodeTypes = {
   llm: LLMNode,
   customOutput: OutputNode,
   text: TextNode,
+  math: MathNode,
+  merge: MergeNode,
+  delay: DelayNode,
+  auth: AuthNode,
+  alert: AlertNode,
 };
 
 const selector = (state) => ({
@@ -90,7 +100,7 @@ export const PipelineUI = () => {
 
     return (
         <>
-        <div ref={reactFlowWrapper} style={{width: '100wv', height: '70vh'}}>
+        <div ref={reactFlowWrapper} style={{ flexGrow: 1, width: '100%', height: '100%', position: 'relative' }}>
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
@@ -105,7 +115,7 @@ export const PipelineUI = () => {
                 snapGrid={[gridSize, gridSize]}
                 connectionLineType='smoothstep'
             >
-                <Background color="#aaa" gap={gridSize} />
+                <Background color="rgba(255, 255, 255, 0.08)" gap={gridSize} />
                 <Controls />
                 <MiniMap />
             </ReactFlow>
