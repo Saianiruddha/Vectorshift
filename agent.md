@@ -29,26 +29,26 @@ VECTOR_SHIFT/
 │   ├── main.py                   # Main FastAPI server (CORS, Endpoint, Cycle Validation)
 │   └── requirements.txt          # Python dependencies (FastAPI, Uvicorn, Pydantic)
 │
-├── src/                          # React Frontend Directory (TanStack Start + TailwindCSS v4)
-│   ├── components/               # Generic UI components
-│   ├── hooks/                    # Custom React hooks
-│   ├── lib/                      # Helper libraries
-│   ├── routes/                   # Routing configuration
-│   ├── pipeline/                 # Core Pipeline Builder components
-│   │   ├── BaseNode.jsx          # Abstract node container
-│   │   ├── nodes/                # Pipeline nodes implementation
-│   │   ├── pipeline.css          # Design system styling
-│   │   ├── store.js              # Zustand store
-│   │   ├── submit.jsx            # Submit request handlers & Modal results
-│   │   ├── toolbar.jsx           # Canvas toolbar
-│   │   └── ui.jsx                # ReactFlow canvas board
-│   ├── server.ts                 # Nitro server runner
-│   └── styles.css                # Global CSS imports
-│
-├── public/                       # Static public assets
-├── package.json                  # Root dependencies (React 19, ReactFlow, Tailwind, TanStack)
-├── vite.config.ts                # Vite packaging configuration
-├── tsconfig.json                 # TypeScript compiler configuration
+├── frontend/                     # React Frontend Directory (TanStack Start + TailwindCSS v4)
+│   ├── src/
+│   │   ├── components/           # Generic UI components
+│   │   ├── hooks/                # Custom React hooks
+│   │   ├── lib/                  # Helper libraries
+│   │   ├── routes/               # Routing configuration
+│   │   ├── pipeline/             # Core Pipeline Builder components
+│   │   │   ├── BaseNode.jsx      # Abstract node container
+│   │   │   ├── nodes/            # Pipeline nodes implementation
+│   │   │   ├── pipeline.css      # Design system styling
+│   │   │   ├── store.js          # Zustand store
+│   │   │   ├── submit.jsx        # Submit request handlers & Modal results
+│   │   │   ├── toolbar.jsx       # Canvas toolbar
+│   │   │   └── ui.jsx            # ReactFlow canvas board
+│   │   ├── server.ts             # Nitro server runner
+│   │   └── styles.css            # Global CSS imports
+│   ├── public/                   # Static public assets
+│   ├── package.json              # Frontend package dependencies
+│   ├── vite.config.ts            # Vite configuration
+│   └── tsconfig.json             # TypeScript configuration
 ├── agent.md                      # This documentation file
 └── implementation_plan.md        # Original implementation architectural plan
 ```
@@ -57,7 +57,7 @@ VECTOR_SHIFT/
 
 ## 3. Detailed Component Descriptions
 
-### Frontend Components (`src/pipeline/`)
+### Frontend Components (`frontend/src/pipeline/`)
 
 *   **`BaseNode.jsx`**:
     A shared container layout that wraps all nodes. It renders node category labels, icons, name titles, a delete button (calling `onNodesChange` to delete the node), and maps custom target (left) and source (right) handles based on configuration.
@@ -134,7 +134,7 @@ uvicorn main:app --reload --port 8000
 
 ### Running Frontend (Vite)
 ```bash
-# Run from root directory
+cd frontend
 npm install
 npm run dev
 ```
