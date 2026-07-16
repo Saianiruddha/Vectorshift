@@ -29,33 +29,26 @@ VECTOR_SHIFT/
 │   ├── main.py                   # Main FastAPI server (CORS, Endpoint, Cycle Validation)
 │   └── requirements.txt          # Python dependencies (FastAPI, Uvicorn, Pydantic)
 │
-├── frontend/                     # React Frontend Directory
-│   ├── public/                   # Static browser assets
-│   ├── src/
-│   │   ├── nodes/                # Pipeline Node components
-│   │   │   ├── BaseNode.js       # Node abstraction wrapper (Handles, styling, layout)
-│   │   │   ├── inputNode.js      # Input component (I/O)
-│   │   │   ├── outputNode.js     # Output component (I/O)
-│   │   │   ├── llmNode.js        # LLM component (AI Model)
-│   │   │   ├── textNode.js       # Text component (Logic, variable handles, auto-resize)
-│   │   │   ├── mathNode.js       # Arithmetic component
-│   │   │   ├── mergeNode.js      # Concatenation component
-│   │   │   ├── delayNode.js      # Timeout delay component
-│   │   │   ├── authNode.js       # API key/scope credential component
-│   │   │   └── alertNode.js      # Visual notification flag component
-│   │   │
-│   │   ├── App.js                # Core entry-point layout
-│   │   ├── draggableNode.js      # Sidebar item wrapper providing HTML5 drag-and-drop
-│   │   ├── index.css             # Glassmorphic style design system (variables, animations)
-│   │   ├── index.js              # React DOM mounting
-│   │   ├── store.js              # Zustand store managing ReactFlow nodes and edges
-│   │   ├── submit.js             # Submit button calling the backend and showing results modal
-│   │   ├── toolbar.js            # Node sidebar selection dashboard
-│   │   └── ui.js                 # Drag over listener, drop coordinator, & ReactFlow canvas
-│   │
-│   ├── package.json              # Node dependencies (React, ReactFlow, Zustand)
-│   └── package-lock.json         # Pinned packages lockfile
+├── src/                          # React Frontend Directory (TanStack Start + TailwindCSS v4)
+│   ├── components/               # Generic UI components
+│   ├── hooks/                    # Custom React hooks
+│   ├── lib/                      # Helper libraries
+│   ├── routes/                   # Routing configuration
+│   ├── pipeline/                 # Core Pipeline Builder components
+│   │   ├── BaseNode.jsx          # Abstract node container
+│   │   ├── nodes/                # Pipeline nodes implementation
+│   │   ├── pipeline.css          # Design system styling
+│   │   ├── store.js              # Zustand store
+│   │   ├── submit.jsx            # Submit request handlers & Modal results
+│   │   ├── toolbar.jsx           # Canvas toolbar
+│   │   └── ui.jsx                # ReactFlow canvas board
+│   ├── server.ts                 # Nitro server runner
+│   └── styles.css                # Global CSS imports
 │
+├── public/                       # Static public assets
+├── package.json                  # Root dependencies (React 19, ReactFlow, Tailwind, TanStack)
+├── vite.config.ts                # Vite packaging configuration
+├── tsconfig.json                 # TypeScript compiler configuration
 ├── agent.md                      # This documentation file
 └── implementation_plan.md        # Original implementation architectural plan
 ```
@@ -64,11 +57,11 @@ VECTOR_SHIFT/
 
 ## 3. Detailed Component Descriptions
 
-### Frontend Components (`frontend/src/`)
+### Frontend Components (`src/pipeline/`)
 
-*   **`nodes/BaseNode.js`**:
+*   **`BaseNode.jsx`**:
     A shared container layout that wraps all nodes. It renders node category labels, icons, name titles, a delete button (calling `onNodesChange` to delete the node), and maps custom target (left) and source (right) handles based on configuration.
-*   **`nodes/textNode.js`**:
+*   **`nodes/textNode.jsx`**:
     Features two core dynamic behaviors:
     1.  **Dynamic Resizing**: The `<textarea>` length of the longest line and the total line breaks are computed on input, scaling the node's `width` and `height` dynamically.
     2.  **Dynamic Handles**: Uses regex `{{\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*}}` to extract valid Javascript variable names typed inside double curly braces. These variables are mapped into target (left) input handles dynamically and spaced out evenly.
@@ -76,7 +69,7 @@ VECTOR_SHIFT/
     Provides Zustand store triggers:
     *   `nodes` & `edges`: Array structures containing standard ReactFlow elements.
     *   `updateNodeField(nodeId, fieldName, fieldValue)`: Propagates data entered inside input boxes (like names or selects) back to the global `nodes` data list so the values are included when sent to the backend.
-*   **`submit.js`**:
+*   **`submit.jsx`**:
     Pulls `nodes` and `edges` from the store on click, sends them to the backend, and opens a glassmorphic modal overlay reporting node metrics and verifying if the graph is a DAG.
 
 ### Backend Component (`backend/main.py`)
@@ -139,10 +132,10 @@ cd backend
 uvicorn main:app --reload --port 8000
 ```
 
-### Running Frontend
+### Running Frontend (Vite)
 ```bash
-cd frontend
+# Run from root directory
 npm install
-npm start
+npm run dev
 ```
-The React workspace will be accessible at `http://localhost:3000`.
+The React workspace will be accessible at `http://localhost:3000` (or the port shown in your terminal).
