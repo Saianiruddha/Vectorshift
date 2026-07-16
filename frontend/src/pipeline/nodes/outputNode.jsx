@@ -12,10 +12,10 @@ export const OutputNode = ({ id, data }) => {
 
   // Sync initial state to store if not present
   useEffect(() => {
-    if (!data?.outputName) {
+    if (data?.outputName === undefined) {
       updateNodeField(id, 'outputName', currName);
     }
-    if (!data?.outputType) {
+    if (data?.outputType === undefined) {
       updateNodeField(id, 'outputType', outputType);
     }
   }, [id, data, currName, outputType, updateNodeField]);

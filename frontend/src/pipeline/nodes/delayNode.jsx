@@ -10,7 +10,7 @@ export const DelayNode = ({ id, data }) => {
   const [delay, setDelay] = useState(data?.delay || 1);
 
   useEffect(() => {
-    if (!data?.delay) {
+    if (data?.delay === undefined) {
       updateNodeField(id, 'delay', delay);
     }
   }, [id, data, delay, updateNodeField]);

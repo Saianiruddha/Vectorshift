@@ -10,7 +10,7 @@ export const MathNode = ({ id, data }) => {
   const [operation, setOperation] = useState(data?.operation || 'add');
 
   useEffect(() => {
-    if (!data?.operation) {
+    if (data?.operation === undefined) {
       updateNodeField(id, 'operation', operation);
     }
   }, [id, data, operation, updateNodeField]);

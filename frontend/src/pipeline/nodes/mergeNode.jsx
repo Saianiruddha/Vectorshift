@@ -10,7 +10,7 @@ export const MergeNode = ({ id, data }) => {
   const [separator, setSeparator] = useState(data?.separator || ', ');
 
   useEffect(() => {
-    if (!data?.separator) {
+    if (data?.separator === undefined) {
       updateNodeField(id, 'separator', separator);
     }
   }, [id, data, separator, updateNodeField]);

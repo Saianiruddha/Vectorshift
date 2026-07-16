@@ -11,10 +11,10 @@ export const AlertNode = ({ id, data }) => {
   const [message, setMessage] = useState(data?.message || '');
 
   useEffect(() => {
-    if (!data?.alertLevel) {
+    if (data?.alertLevel === undefined) {
       updateNodeField(id, 'alertLevel', alertLevel);
     }
-    if (!data?.message) {
+    if (data?.message === undefined) {
       updateNodeField(id, 'message', message);
     }
   }, [id, data, alertLevel, message, updateNodeField]);

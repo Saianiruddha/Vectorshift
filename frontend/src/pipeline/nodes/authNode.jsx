@@ -11,10 +11,10 @@ export const AuthNode = ({ id, data }) => {
   const [scope, setScope] = useState(data?.scope || 'read');
 
   useEffect(() => {
-    if (!data?.authType) {
+    if (data?.authType === undefined) {
       updateNodeField(id, 'authType', authType);
     }
-    if (!data?.scope) {
+    if (data?.scope === undefined) {
       updateNodeField(id, 'scope', scope);
     }
   }, [id, data, authType, scope, updateNodeField]);
