@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# VectorShift Frontend Workspace
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This directory contains the user interface components of the VectorShift Pipeline Builder, built with **Vite**, **TanStack Start**, **React Flow**, **Zustand**, and **Tailwind CSS v4**.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Directory Organization
 
-### `npm start`
+*   **`src/pipeline/`**: Houses all core visual components of the builder:
+    *   **`nodes/`**: Implements custom and abstracted nodes (Inputs, Outputs, LLMs, Text, Arithmetic, Merges, Timers, Auth, Alerts).
+    *   **`BaseNode.jsx`**: Shared abstraction component.
+    *   **`pipeline.css`**: Design system tokens and mobile responsive queries.
+    *   **`store.js`**: Global canvas state manager.
+    *   **`submit.jsx`**: Submit payload poster and custom modal.
+    *   **`ui.jsx`**: React Flow canvas integration.
+*   **`src/routes/`**: Handles TanStack React Router routes.
+*   **`src/components/ui/`**: Radix UI interactive primitive components.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Available Commands
 
-### `npm test`
+In the `frontend` directory, you can run:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `npm run dev`
+Starts the Vite dev server with hot module replacement (HMR) at `http://localhost:3000`.
 
 ### `npm run build`
+Compiles the TypeScript and outputs an optimized production bundle.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `npm run lint`
+Checks codebase files for style inconsistencies and compiler errors.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### `npm run format`
+Runs Prettier formatting across the codebase.
