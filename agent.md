@@ -139,3 +139,12 @@ npm install
 npm run dev
 ```
 The React workspace will be accessible at `http://localhost:3000` (or the port shown in your terminal).
+
+---
+
+## 6. Development & Design Principles
+
+When proposing modifications or writing code, agents and developers must strictly adhere to the following principles:
+*   **Mobile-First Responsive Design**: Always approach layouts starting from mobile constraints first, expanding dynamically for desktop viewports. Ensure touch targets, fonts, and controls adapt seamlessly to small screens.
+*   **Performant Code via Simplicity**: Write the simplest, most readable solution that solves the problem. Optimize for rendering efficiency, avoid redundant re-renders, and minimize bundle size.
+*   **No Over-Engineering**: Do not introduce complex architectures, additional dependencies, or heavy abstractions unless absolutely necessary. Solve the immediate requirements first and maintain clear, simple structures.
