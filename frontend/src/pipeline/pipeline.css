@@ -588,3 +588,71 @@ body {
   from { transform: translateY(12px); opacity: 0; }
   to   { transform: translateY(0); opacity: 1; }
 }
+
+/* ============================================================
+   Mobile-First Responsive Adjustments (Viewport < 768px)
+   ============================================================ */
+@media (max-width: 768px) {
+  .toolbar-container {
+    padding: 24px 16px 16px;
+  }
+  
+  .toolbar-container::before {
+    left: 16px;
+    top: 10px;
+  }
+  
+  .toolbar-title {
+    font-size: 26px;
+    margin: 10px 0 4px;
+  }
+  
+  .toolbar-subtitle {
+    font-size: 12px;
+    margin-bottom: 14px;
+  }
+  
+  .toolbar-nodes {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-top: 14px;
+    padding-bottom: 6px;
+    gap: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Hide default scrollbar on Firefox */
+  }
+  
+  .toolbar-nodes::-webkit-scrollbar {
+    display: none; /* Hide default scrollbar on Chrome/Safari/Webkit */
+  }
+  
+  .draggable-node-item {
+    flex-shrink: 0;
+    height: 36px;
+    padding: 8px 14px;
+    font-size: 11.5px;
+  }
+  
+  .submit-panel {
+    bottom: 20px;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 24px;
+  }
+  
+  .modal-content {
+    padding: 30px 20px 24px;
+  }
+  
+  .modal-title {
+    font-size: 26px;
+    margin-bottom: 18px;
+  }
+}
+
