@@ -68,9 +68,15 @@ VECTOR_SHIFT/
 *   **`store.js`**:
     Provides Zustand store triggers:
     *   `nodes` & `edges`: Array structures containing standard ReactFlow elements.
-    *   `updateNodeField(nodeId, fieldName, fieldValue)`: Propagates data entered inside input boxes (like names or selects) back to the global `nodes` data list so the values are included when sent to the backend.
+    *   `updateNodeField(nodeId, fieldName, fieldValue)`: Propagates data entered inside input boxes back to the global state.
+    *   `savePipeline()` & `loadPipeline()`: Persists and restores the active canvas structure to/from browser `localStorage`.
+    *   `clearCanvas()`: Resets the canvas by wiping all nodes, edges, and index counters.
+    *   `loadImportedPipeline(data)`: Restores a pipeline layout from an external JSON object structure.
 *   **`submit.jsx`**:
-    Pulls `nodes` and `edges` from the store on click, sends them to the backend, and opens a glassmorphic modal overlay reporting node metrics and verifying if the graph is a DAG.
+    Pulls `nodes` and `edges` from the store on click, sends them to the backend, and opens a glassmorphic modal overlay reporting node metrics and verifying if the graph is a DAG. It also:
+    *   Renders a Suggested Execution Path timeline illustrating the topological sort order of the nodes.
+    *   Provides file handlers to export the layout as a local `.json` file and import/upload configuration files.
+    *   Integrates clear canvas confirmation panels and success notification toast slide-ups.
 
 ### Backend Component (`backend/main.py`)
 
@@ -117,7 +123,8 @@ Validates pipeline structures and checks for loops.
     {
       "num_nodes": 2,
       "num_edges": 1,
-      "is_dag": true
+      "is_dag": true,
+      "topological_order": ["Input (email)", "Text Prompt"]
     }
     ```
 
