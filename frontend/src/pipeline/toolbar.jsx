@@ -10,6 +10,7 @@ export const PipelineToolbar = () => {
         Compose intelligence workflows the way your firm actually runs them —
         every node sourced, every connection considered.
       </p>
+      <div className="toolbar-section-label">01 — DRAG A COMPONENT ONTO THE CANVAS</div>
       <div className="toolbar-nodes">
         <DraggableNode type='customInput' label='Input' />
         <DraggableNode type='llm' label='LLM' />
