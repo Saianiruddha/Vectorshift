@@ -631,6 +631,104 @@ body {
 }
 
 /* ============================================================
+   Panel divider & action modifiers
+   ============================================================ */
+.panel-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--hairline-strong);
+  margin: 0 2px;
+}
+
+.clear-action-btn:hover {
+  border-color: #8a3a4a !important;
+  color: #8a3a4a !important;
+  background: rgba(138, 58, 74, 0.05) !important;
+}
+
+/* ============================================================
+   Suggested Execution Path Timeline (Modal)
+   ============================================================ */
+.modal-timeline-section {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border-top: 1px solid var(--hairline);
+  padding-top: 20px;
+}
+
+.modal-section-subtitle {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--ink-500);
+  text-transform: uppercase;
+  margin: 0 0 16px;
+}
+
+.timeline-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.timeline-step {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  min-height: 42px;
+}
+
+.timeline-dot-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 10px;
+  position: relative;
+}
+
+.timeline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  border: 1.5px solid var(--accent-gold);
+  margin-top: 6px;
+  z-index: 2;
+}
+
+.timeline-line {
+  width: 1.5px;
+  background: var(--hairline-strong);
+  flex-grow: 1;
+  margin-top: 2px;
+  margin-bottom: -6px;
+  z-index: 1;
+}
+
+.timeline-step-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+}
+
+.timeline-step-number {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--ink-400);
+  background: var(--bg-canvas-alt);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.timeline-step-label {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  color: var(--ink-900);
+}
+
+/* ============================================================
    Mobile-First Responsive Adjustments (Viewport < 768px)
    ============================================================ */
 @media (max-width: 768px) {
@@ -695,15 +793,35 @@ body {
     bottom: 16px;
     width: calc(100% - 32px);
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 6px;
+    background: var(--bg-panel);
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--hairline-strong);
+    box-shadow: 0 8px 24px rgba(14,15,19,0.12);
   }
   
   .submit-btn {
     width: 100%;
+    order: 6; /* Position Submit as the main action at the bottom */
     justify-content: center;
-    padding: 11px 20px;
+    padding: 10px 20px;
     font-size: 11px;
-    box-shadow: 0 8px 20px rgba(14, 15, 19, 0.3);
+    box-shadow: 0 4px 12px rgba(14, 15, 19, 0.2);
+  }
+
+  .secondary-submit-btn {
+    flex: 1 1 45%; /* Grid layout of 2 columns on mobile */
+    justify-content: center;
+    padding: 8px 12px;
+    font-size: 11px;
+    height: 34px;
+  }
+  
+  .panel-divider {
+    display: none !important; /* Hide dividers to let wrap layout flow nicely */
   }
   
   .modal-content {

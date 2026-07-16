@@ -75,4 +75,20 @@ export const useStore = create((set, get) => ({
       }
       return false;
     },
+    // Clear the canvas
+    clearCanvas: () => {
+      set({
+        nodes: [],
+        edges: [],
+        nodeIDs: {},
+      });
+    },
+    // Load an imported JSON pipeline config directly into store state
+    loadImportedPipeline: (data) => {
+      set({
+        nodes: data.nodes || [],
+        edges: data.edges || [],
+        nodeIDs: data.nodeIDs || {},
+      });
+    },
   }));
