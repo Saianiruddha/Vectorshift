@@ -10,10 +10,10 @@ The application is a visual workflow builder that allows users to create node-ba
 
 ```mermaid
 graph TD
-    A[React Flow UI] -->|Drag & Drop| B[Zustand Store]
+    A[React Flow UI] -->|Drag and Drop| B[Zustand Store]
     B -->|State Sync| A
     A -->|POST JSON Payload| C[FastAPI Backend]
-    C -->|Cycle Detection & Statistics| A
+    C -->|Cycle Detection and Statistics| A
 ```
 
 *   **Frontend (React & ReactFlow)**: Renders a drag-and-drop workspace utilizing [React Flow](https://reactflow.dev/) for canvas management. It stores nodes, edges, connections, and custom field states inside a global **Zustand** store.
